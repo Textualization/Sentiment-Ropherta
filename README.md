@@ -5,9 +5,11 @@ This is a multilayer feed forward neural network for text sentiment classificati
 - **Training time:** Hours
 
 ## Installation
-Clone the project locally using [Composer](https://getcomposer.org):
+Clone the project locally using [Composer](https://getcomposer.org) and then install the required libraries:
 ```sh
 $ composer create-project rubix/sentiment
+$ composer exec -- php -r "require 'vendor/autoload.php'; OnnxRuntime\Vendor::check();"
+$ composer exec -- php -r "require 'vendor/autoload.php'; Textualization\Ropherta\Vendor::check();"
 ```
 
 > **Note:** Installation may take longer than usual because of the large dataset.
@@ -217,90 +219,87 @@ Now we can execute the validation script from the command line.
 $ php validate.php
 ```
 
-Take a look at the report and see how well the model performs. According to the example report below, our model is about 88% accurate.
+Take a look at the report and see how well the model performs. According to the example report below, our model is about 90% accurate.
 
 ```json
 [
     {
         "overall": {
-            "accuracy": 0.8756,
-            "accuracy_balanced": 0.8761875711932667,
-            "f1_score": 0.8751887769748257,
-            "precision": 0.8820119837481977,
-            "recall": 0.8761875711932667,
-            "specificity": 0.8761875711932667,
-            "negative_predictive_value": 0.8820119837481977,
-            "false_discovery_rate": 0.11798801625180227,
-            "miss_rate": 0.12381242880673332,
-            "fall_out": 0.12381242880673332,
-            "false_omission_rate": 0.11798801625180227,
-            "threat_score": 0.778148276032161,
-            "mcc": 0.7581771833363391,
-            "informedness": 0.7523751423865335,
-            "markedness": 0.7640239674963953,
-            "true_positives": 8756,
-            "true_negatives": 8756,
-            "false_positives": 1244,
-            "false_negatives": 1244,
+            "accuracy": 0.9063,
+            "balanced accuracy": 0.9062606362844616,
+            "f1 score": 0.9062482255825779,
+            "precision": 0.9070910232441287,
+            "recall": 0.9062606362844616,
+            "specificity": 0.9062606362844616,
+            "negative predictive value": 0.9070910232441287,
+            "false discovery rate": 0.09290897675587129,
+            "miss rate": 0.09373936371553843,
+            "fall out": 0.09373936371553843,
+            "false omission rate": 0.09290897675587129,
+            "mcc": 0.8133512356389514,
+            "informedness": 0.8125212725689233,
+            "markedness": 0.8141820464882574,
+            "true positives": 9063,
+            "true negatives": 9063,
+            "false positives": 937,
+            "false negatives": 937,
             "cardinality": 10000
         },
         "classes": {
             "positive": {
-                "accuracy": 0.8756,
-                "accuracy_balanced": 0.8761875711932667,
-                "f1_score": 0.8680246127731805,
-                "precision": 0.9338050673362246,
-                "recall": 0.8109018830525273,
-                "specificity": 0.941473259334006,
-                "negative_predictive_value": 0.8302189001601709,
-                "false_discovery_rate": 0.06619493266377541,
-                "miss_rate": 0.1890981169474727,
-                "fall_out": 0.05852674066599395,
-                "false_omission_rate": 0.16978109983982914,
-                "threat_score": 0.7668228678537957,
-                "informedness": 0.7523751423865335,
-                "markedness": 0.7523751423865335,
-                "mcc": 0.7581771833363391,
-                "true_positives": 4091,
-                "true_negatives": 4665,
-                "false_positives": 290,
-                "false_negatives": 954,
-                "cardinality": 5045,
-                "proportion": 0.5045
+                "accuracy": 0.9063,
+                "balanced accuracy": 0.9062606362844616,
+                "f1 score": 0.9084513922813874,
+                "precision": 0.8895905089934941,
+                "recall": 0.9281293671391495,
+                "specificity": 0.8843919054297736,
+                "negative predictive value": 0.9245915374947633,
+                "false discovery rate": 0.11040949100650588,
+                "miss rate": 0.07187063286085049,
+                "fall out": 0.11560809457022636,
+                "false omission rate": 0.0754084625052367,
+                "informedness": 0.8125212725689233,
+                "markedness": 0.8141820464882574,
+                "mcc": 0.8133512356389514,
+                "true positives": 4649,
+                "true negatives": 4414,
+                "false positives": 577,
+                "false negatives": 360,
+                "cardinality": 5009,
+                "proportion": 0.5009
             },
             "negative": {
-                "accuracy": 0.8756,
-                "accuracy_balanced": 0.8761875711932667,
-                "f1_score": 0.8823529411764707,
-                "precision": 0.8302189001601709,
-                "recall": 0.941473259334006,
-                "specificity": 0.8109018830525273,
-                "negative_predictive_value": 0.9338050673362246,
-                "false_discovery_rate": 0.16978109983982914,
-                "miss_rate": 0.05852674066599395,
-                "fall_out": 0.1890981169474727,
-                "false_omission_rate": 0.06619493266377541,
-                "threat_score": 0.7894736842105263,
-                "informedness": 0.7523751423865335,
-                "markedness": 0.7523751423865335,
-                "mcc": 0.7581771833363391,
-                "true_positives": 4665,
-                "true_negatives": 4091,
-                "false_positives": 954,
-                "false_negatives": 290,
-                "cardinality": 4955,
-                "proportion": 0.4955
+                "accuracy": 0.9063,
+                "balanced accuracy": 0.9062606362844616,
+                "f1 score": 0.9040450588837685,
+                "precision": 0.9245915374947633,
+                "recall": 0.8843919054297736,
+                "specificity": 0.9281293671391495,
+                "negative predictive value": 0.8895905089934941,
+                "false discovery rate": 0.0754084625052367,
+                "miss rate": 0.11560809457022636,
+                "fall out": 0.07187063286085049,
+                "false omission rate": 0.11040949100650588,
+                "informedness": 0.8125212725689233,
+                "markedness": 0.8141820464882574,
+                "mcc": 0.8133512356389514,
+                "true positives": 4414,
+                "true negatives": 4649,
+                "false positives": 360,
+                "false negatives": 577,
+                "cardinality": 4991,
+                "proportion": 0.4991
             }
         }
     },
     {
         "positive": {
-            "positive": 4091,
-            "negative": 290
+            "positive": 4649,
+            "negative": 577
         },
         "negative": {
-            "positive": 954,
-            "negative": 4665
+            "positive": 360,
+            "negative": 4414
         }
     }
 ]

@@ -21,7 +21,8 @@
     ],
     "require": {
         "php": ">=7.4",
-        "rubix/ml": "^2.2"
+        "rubix/ml": "^2.2",
+        "textualization/ropherta": "^0.0.1"
     },
     "scripts": {
         "predict": "@php predict.php",

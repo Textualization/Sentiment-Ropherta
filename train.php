@@ -2,6 +2,8 @@
 
 include __DIR__ . '/vendor/autoload.php';
 
+require 'RophertaVectorizer.php';
+
 use Rubix\ML\Loggers\Screen;
 use Rubix\ML\Datasets\Labeled;
 use Rubix\ML\PersistentModel;
@@ -40,23 +42,11 @@ $dataset = new Labeled($samples, $labels);
 
 $estimator = new PersistentModel(
     new Pipeline([
-        new TextNormalizer(),
-        new WordCountVectorizer(10000, 2, 0.4, new NGram(1, 2)),
-        new TfIdfTransformer(),
-        new ZScaleStandardizer(),
+        new RophertaVectorizer(),
     ], new MultilayerPerceptron([
         new Dense(100),
         new Activation(new LeakyReLU()),
-        new Dense(100),
-        new Activation(new LeakyReLU()),
-        new Dense(100, 0.0, false),
-        new BatchNorm(),
-        new Activation(new LeakyReLU()),
-        new Dense(50),
-        new PReLU(),
-        new Dense(50),
-        new PReLU(),
-    ], 256, new AdaMax(0.0001))),
+    ], 1, new AdaMax(0.0001))),
     new Filesystem('sentiment.rbx', true)
 );
 

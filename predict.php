@@ -2,6 +2,8 @@
 
 include __DIR__ . '/vendor/autoload.php';
 
+require 'RophertaVectorizer.php';
+
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 use Rubix\ML\Datasets\Unlabeled;
